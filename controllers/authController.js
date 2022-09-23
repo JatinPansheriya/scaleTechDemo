@@ -11,6 +11,7 @@ module.exports.register = async (req, res) => {
         let email = body.email;
         let password = body.password;
         let mobileNo = body.mobileNo;
+        let status = (body.status) ? (body.status) : 1
 
         var checkEmailExist = await authModel.getUserByEmail(email);
         if (!checkEmailExist.status) {
@@ -22,7 +23,8 @@ module.exports.register = async (req, res) => {
             lastName,
             email,
             password: md5(password),
-            mobileNo
+            mobileNo,
+            status
         }
         var userRegister = await authModel.userRegister(data);
         if (!userRegister.status) {
@@ -49,7 +51,6 @@ module.exports.login = async (req, res) => {
         var token = jwt.sign(JSON.stringify(checkUserLogin.data[0]), config.JWT_SECRET);
         return res.json({ status: true, message: "User login successfully!", data: token })
     } catch (e) {
-        console.log(e);
         return res.json({ status: false, message: "Something went wrong. Please try again." });
     }
 }
