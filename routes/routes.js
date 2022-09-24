@@ -11,6 +11,7 @@ const employeeController =require("./../controllers/employeeController");
 
 router.post("/employee/details/add",jwtHelper.verifyJWTToken,employeeController.addEmployeeDetails);
 router.get("/employee/details/get",jwtHelper.verifyJWTToken,employeeController.getEmployeeDetails);
+router.get("/employee/details/pdf/download",employeeController.EmployeeDetailsPdfDownload);
 
 const technologyController =require("../controllers/categoryController");
 

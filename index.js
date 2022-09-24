@@ -6,7 +6,8 @@ const router = require("./routes/routes");
 const app =express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(fileUpload());
+app.use(fileUpload({createParentPath:true}));
+app.use(express.static(__dirname + "/public"));
 app.use("/",router)
 
 const PORT = config.PORT ? config.PORT : 3000;
